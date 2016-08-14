@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+    <script src="ionic/js/ionic.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="ionic/css/ionic.min.css">
+    <meta charset="utf-8">
+</head>
+<body ng-controller="main">
+<!-- 	<ion-header-bar class="bar-positive">
+		<h1 class="title">ion-tabs</h1>
+
+	</ion-header-bar> -->
+
+
+
+
+	<!-- //载入模板的容器 -->
+	<ion-nav-view></ion-nav-view>
+	<!-- <ion-tabs></ion-tabs> -->
+	<script>
+	var m1 = angular.module("myApp",["ionic"]);
+
+	m1.config(['$stateProvider',"$urlRouterProvider",function($stateProvider,$urlRouterProvider) {
+
+		//tabs 是父状态
+
+		//子状态声明 父状态.子状态名字
+		$stateProvider.state("tabs",{
+			url:"/tabs",
+			// abstract:true, 
+			templateUrl:"template/tabs.html"
+		}).state("tabs.tab1",{
+			url:"/tab1",
+			views:{
+				"myTab1":{
+					templateUrl:"template/tab1.html",
+					controller:"tab1Ctrl"
+				}
+			}
+		}).state("tabs.tab2",{
+			url:"/tab2",
+			views:{
+				"myTab2":{
+					templateUrl:"template/tab2.html"
+				}
+			}
+		}).state("tabs.tab3",{
+			url:"/tab3",
+			views:{
+				"myTab3":{
+					templateUrl:"template/tab3.html"
+				}
+			}
+		}).state("tabs.tab2Detail",{
+			url:"/tab2Detail/:kerwinData",
+			views:{
+				"myTab2":{
+					templateUrl:"template/tab2Detail.html",
+					controller:"tab2DetailCtrl"
+				}
+			}
+		}).state("starter",{
+			url:"/starter",
+			templateUrl:"template/starter.html"
+		})
+		// if(localStorage.getItem("first")){
+		// 	$urlRouterProvider.otherwise("/tabs/tab1");
+		// }else{
+			$urlRouterProvider.otherwise("/starter");
+			// localStorage.setItem("first",true);
+		// }
+		
+	}])
+
+
+	m1.controller('main', ['$scope',"$state","$ionicSideMenuDelegate", function($scope,$state,$ionicSideMenuDelegate){
+		//如果是一个子状态 ，父状态会默认先被加载
+		$state.go("tabs.tab2");
+
+
+		$scope.closeSideMenu = function(){
+			$ionicSideMenuDelegate.toggleLeft();
+		}
+	}])
+
+	m1.controller('tab2DetailCtrl', ['$scope',"$stateParams", function($scope,$stateParams){
+		
+		console.log($stateParams);
+
+		$scope.myparam  =$stateParams.kerwinData;
+		// {"kerwinData":*****}
+	}])
+
+	m1.controller('tab1Ctrl', ['$scope', function($scope){
+		$scope.doDragRight = function(ev){
+			// console.log(ev);
+			//阻止冒泡
+			ev.stopPropagation();
+		}
+	}])
+	</script>
+</body>
+</html>

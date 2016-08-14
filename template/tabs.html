@@ -1,0 +1,36 @@
+<ion-side-menus>
+	<ion-side-menu side="left">
+	
+		<ion-content >
+		<ion-list>
+			<ion-item ui-sref="tabs.tab1" ng-click="closeSideMenu()">tab1</ion-item>
+			<ion-item ui-sref="tabs.tab2">tab2</ion-item>
+			<ion-item ui-sref="tabs.tab3">tab3</ion-item>
+		</ion-list>
+
+		</ion-content>
+	</ion-side-menu>
+
+<ion-side-menu-content drag-content="true">
+		<ion-nav-bar class="bar-positive" align-title="center">
+		<ion-nav-back-button class="button-clear"></ion-nav-back-button>
+
+	</ion-nav-bar>
+
+
+	<ion-tabs class="tabs-positive"> 
+			<ion-tab title="tab1" ui-sref="tabs.tab1">
+
+				<ion-nav-view name="myTab1" ></ion-nav-view>
+			</ion-tab>
+			<ion-tab title="tab2" ui-sref="tabs.tab2">
+				<ion-nav-view name="myTab2"></ion-nav-view>
+			</ion-tab>
+			<ion-tab title="tab3" ui-sref="tabs.tab3">
+				<ion-nav-view name="myTab3"></ion-nav-view>
+			</ion-tab>
+		</ion-tabs>
+
+</ion-side-menu-content>
+
+</ion-side-menus>
